@@ -10,6 +10,10 @@ document.getElementById("submit").addEventListener("click", e => postForm(e));
 
 // CHECK JSHINT API KEY STATUS //
 
+/**
+ * Check status of API key
+ * @param {*} e 
+ */
 async function getStatus(e) {
     const queryString = `${API_URL}?api_key=${API_KEY}`;
 
@@ -25,6 +29,10 @@ async function getStatus(e) {
     }
 }
 
+/**
+ * Display expiration date of API key
+ * @param {*} data 
+ */
 function displayStatus(data) {
     // Set modal heading text
     let heading = "API Key Status";
@@ -41,6 +49,10 @@ function displayStatus(data) {
 
 // CHECK JS CODE //
 
+/**
+ * Send js code to JSHint API, which returns information about any code errors
+ * @param {*} e 
+ */
 async function postForm(e) {
     const form = processOptions(new FormData(document.getElementById("checksform")));
 
@@ -84,6 +96,10 @@ function processOptions(form) {
     return form;
 }
 
+/**
+ * Display the errors in the js code, if there are any
+ * @param {*} data 
+ */
 function displayErrors(data) {
     // Set modal heading text
     let heading = `JSHint Results for ${data.file}`;
@@ -107,6 +123,10 @@ function displayErrors(data) {
     resultsModal.show();
 }
 
+/**
+ * Display information if an exception occurs
+ * @param {*} data 
+ */
 function displayException(data) {
     // Set modal heading text
     let heading = `An Exception Occurred`;
