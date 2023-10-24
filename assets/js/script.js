@@ -41,7 +41,7 @@ function displayStatus(data) {
 // CHECK JS CODE //
 
 async function postForm(e) {
-    const form = new FormData(document.getElementById("checksform"));
+    const form = processOptions(new FormData(document.getElementById("checksform")));
 
     const response = await fetch(API_URL, {
         method: "POST",
@@ -58,6 +58,28 @@ async function postForm(e) {
     } else {
         throw new Error(data.error);
     }
+}
+
+/**
+ * Takes a FormData object and combines all "options" entries into one entry
+ * with a value of a string of the comma-separated options
+ * @param {*} form 
+ * @returns form with options formatted
+ */
+function processOptions(form) {
+    let optArray = [];
+
+    for (let entry of form.entries()) {
+        if (entry[0] === "options") {
+            optArray.push(entry[1]);
+        }
+    }
+
+    form.delete("options");
+
+    form.append("options", optArray.join());
+
+    return form;
 }
 
 function displayErrors(data) {
